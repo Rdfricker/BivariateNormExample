@@ -1,0 +1,335 @@
+library(shiny)
+runApp("/Users/rdfricker/Desktop/Discrete")
+runExample("06_tabsets")
+runApp("/Users/rdfricker/Desktop/Discrete")
+?pgeom
+runApp("/Users/rdfricker/Desktop/Discrete")
+?rect
+runApp("/Users/rdfricker/Desktop/Discrete")
+?dpois
+runApp("/Users/rdfricker/Desktop/Discrete")
+?dgeom
+runApp("/Users/rdfricker/Desktop/Discrete")
+shiny::runGitHub('DiscreteDistnDemos','rdfricker')
+runApp("/Users/rdfricker/Desktop/Discrete")
+library("shiny")
+runApp("/Users/rdfricker/Desktop/Discrete")
+library("shiny")
+runApp(choose.file())
+runApp(file.choose())
+runApp("/Users/rdfricker/Dropbox/Working Files/OA3101/Discrete")
+runApp("/Users/rdfricker/Desktop/Discrete")
+?runif
+runApp("/Users/rdfricker/Desktop/Continuous")
+?dunif
+1-punif(360,30,480)
+punif(360,30,480,lower.tail=FALSE)
+1/(480-30)*(480-360)
+1-pnorm(2,0,1)
+1-pnorm(2)
+pnorm(2,lower.tail=F)
+pnorm(2)-pnorm(-2)
+2*pnorm(2,lower.tail=F)
+pnorm(2)-pnorm(-2)
+1-2*pnorm(2,lower.tail=F)
+1-2*pnorm(-2)
+pnorm(1.73)-0.5
+0.5-pnorm(-1.73)
+pnorm(1.73)-pnorm(0)
+pnorm(1.73)-0.5
+0.5-pnorm(-1.73)
+?pgamma
+?chisq
+?chi
+?pchisq
+?pexp
+?pbeta
+1-pbeta(0.9,4,1/2)
+1-pbeta(0.9,4,2)
+pbeta(0.9,4,2,lower.tail=F)
+?rexp
+?rgamma
+1-pgamma(3,0.8,2.4)
+1-pgamma(3,0.8,1/2.4)
+pgamma(5,3,1/2)
+pchisq(5,6)
+qnorm(0.5,0,1)
+qnorm(0.025,0,1)
+qnorm(0.5,0,1)
+qnorm(0.5,2,10)
+qnorm(0.025,0,1)
+qnorm(0.975,0,1)
+qunif(0.5,0,1)
+qunif(0.5,-5,5)
+qunif(0,10,20)
+qunif(100,10,20)
+qunif(0.5,0,1)
+qunif(0,10,20)
+qunif(98,0,100)
+qunif(90,0,100)
+qunif(90,1,100)
+qunif(0.99,1,100)
+qunif(0.95,1,100)
+qunif(0.90,1,100)
+qunif(0.8,1,100)
+qunif(0.8,0,100)
+qunif(0.99,0,100)
+qunif(0.5,0,1)
+qunif(0,10,20)
+qunif(0.5,0,1)
+qunif(0.5,-5,5)
+qunif(0,10,20)
+qunif(0.99,0,100)
+qnorm(0.9,75,10)
+75+1.28*10
+qgamma(0.05,5,10)
+qgamma(0.95,5,10)
+qgamma(0.95,5,100)
+qgamma(0.95,500,100)
+qgamma(0.95,500,10)
+qgamma(0.95,5000,10)
+qgamma(0.95,50,10)
+qgamma(0.05,50,10)
+qgamma(0.01,50,10)
+qgamma(0.01,50,1)
+qgamma(0.01,50,100)
+qgamma(0.95,50,100)
+qgamma(0.95,500,100)
+qgamma(0.05,500,100)
+qgamma(0.05,2,1)
+qgamma(0.95,2,1)
+1-pgamma(2,2,1)
+qgamma(0.5,2,1)
+pexp(40,1/120)
+pexp(2/3,1/2)
+1-pexp(2/3,1/2)
+1-exp(10.333333)
+1-exp(-0.333333)
+1-exp(-1/3)
+qexp(.9,1/2)
+1-pexp(2/3,2)
+pexp(2/3,2)
+pexp(40,120)
+pexp(40,2/60)
+pexp(2,2/60)
+1-pexp(120,2/60)
+?rgeom
+?rnbinom
+?rhyper
+750/4
+library(shiny)
+runApp("/Users/rdfricke/Desktop/Discrete")
+runApp("/Users/rdfricker/Desktop/Discrete")
+dgeom(1,0.5)
+runApp("/Users/rdfricker/Desktop/Discrete")
+dgeom(0,0.5)
+runApp("/Users/rdfricker/Desktop/Discrete")
+library(shiny)
+runApp("/Users/rdfricker/Desktop/DiscreteDistnDemos")
+Some variable definitions#
+mu1 <- 0	# expected value of x#
+mu2 <- 0.5	# expected value of y#
+sig1 <- 0.5	# variance of x#
+sig2 <- 2	# variance of y#
+rho <- 0.5	# corr(x, y)#
+#
+# Some additional variables for x-axis and y-axis #
+xm <- -3#
+xp <- 3#
+ym <- -3#
+yp <- 3#
+#
+x <- seq(xm, xp, length= as.integer((xp + abs(xm)) * 10))  # vector series x#
+y <- seq(ym, yp, length= as.integer((yp + abs(ym)) * 10))  # vector series y#
+#
+# Core function#
+bivariate <- function(x,y){#
+	term1 <- 1 / (2 * pi * sig1 * sig2 * sqrt(1 - rho^2))#
+	term2 <- (x - mu1)^2 / sig1^2#
+	term3 <- -(2 * rho * (x - mu1)*(y - mu2))/(sig1 * sig2)#
+	term4 <- (y - mu2)^2 / sig2^2#
+	z <- term2 + term3 + term4#
+	term5 <- term1 * exp((-z / (2 *(1 - rho^2))))#
+	return (term5)#
+}#
+#
+# Computes the density values#
+z <- outer(x,y,bivariate)#
+#
+# Plot#
+persp(x, y, z, main = "Bivariate Normal Distribution",#
+		sub = bquote(bold(mu[1])==.(mu1)~", "~sigma[1]==.(sig1)~", "~mu[2]==.(mu2)~#
+		", "~sigma[2]==.(sig2)~", "~rho==.(rho)),#
+		col="orchid2", theta = 55, phi = 30, r = 40, d = 0.1, expand = 0.5,#
+		ltheta = 90, lphi = 180, shade = 0.4, ticktype = "detailed", nticks=5)
+?persp
+mu1 <- 0	# expected value of x#
+mu2 <- 0.5	# expected value of y#
+sig1 <- 0.5	# variance of x#
+sig2 <- 2	# variance of y#
+rho <- 0.5	# corr(x, y)#
+#
+# Some additional variables for x-axis and y-axis #
+y1m <- -3#
+y1p <- 3#
+y2m <- -3#
+y2p <- 3#
+#
+y1 <- seq(xm, xp, length= as.integer((y1p + abs(y1m)) * 10))  # vector series y1#
+y2 <- seq(ym, yp, length= as.integer((y2p + abs(y2m)) * 10))  # vector series y2#
+#
+# Core function#
+bivariate <- function(x,y){#
+	term1 <- 1 / (2 * pi * sig1 * sig2 * sqrt(1 - rho^2))#
+	term2 <- (x - mu1)^2 / sig1^2#
+	term3 <- -(2 * rho * (x - mu1)*(y - mu2))/(sig1 * sig2)#
+	term4 <- (y - mu2)^2 / sig2^2#
+	z <- term2 + term3 + term4#
+	term5 <- term1 * exp((-z / (2 *(1 - rho^2))))#
+	return (term5)#
+}#
+#
+# Computes the density values#
+z <- outer(y1,y2,bivariate)#
+#
+# Plot#
+persp(y1, y2, z, main = "Bivariate Normal Distribution",#
+		sub = bquote(bold(mu[1])==.(mu1)~", "~sigma[1]==.(sig1)~", "~mu[2]==.(mu2)~#
+		", "~sigma[2]==.(sig2)~", "~rho==.(rho)),#
+		col="yellow", theta = 55, phi = 30, r = 40, d = 0.1, expand = 0.5,#
+		ltheta = 90, lphi = 180, shade = 0.4, ticktype = "detailed", nticks=5)
+persp(y1, y2, z, main = "Bivariate Normal Distribution",#
+		sub = bquote(bold(mu[1])==.(mu1)~", "~sigma[1]==.(sig1)~", "~mu[2]==.(mu2)~#
+		", "~sigma[2]==.(sig2)~", "~rho==.(rho)),#
+		col="light yellow", theta = 55, phi = 30, r = 40, d = 0.1, expand = 0.5,#
+		ltheta = 90, lphi = 180, shade = 0.4, ticktype = "detailed", nticks=5)
+persp(y1, y2, z, main = "Bivariate Normal Distribution",#
+		sub = bquote(bold(mu[1])==.(mu1)~", "~sigma[1]==.(sig1)~", "~mu[2]==.(mu2)~#
+		", "~sigma[2]==.(sig2)~", "~rho==.(rho)),#
+		col="light grey", theta = 55, phi = 30, r = 40, d = 0.1, expand = 0.5,#
+		ltheta = 90, lphi = 180, shade = 0.4, ticktype = "detailed", nticks=5)
+persp(y1, y2, z, main = "Bivariate Normal Distribution",#
+		sub = bquote(bold(mu[1])==.(mu1)~", "~sigma[1]==.(sig1)~", "~mu[2]==.(mu2)~#
+		", "~sigma[2]==.(sig2)~", "~rho==.(rho)),#
+		xlab=expression(y[1]),ylab=expression(y[2]),zlab=expression(f(y[1].y[2])),#
+		col="light grey", theta = 55, phi = 30, r = 40, d = 0.1, expand = 0.5,#
+		ltheta = 90, lphi = 180, shade = 0.4, ticktype = "detailed", nticks=5)
+persp(y1, y2, z, main = "Bivariate Normal Distribution",#
+		sub = bquote(bold(mu[1])==.(mu1)~", "~sigma[1]==.(sig1)~", "~mu[2]==.(mu2)~#
+		", "~sigma[2]==.(sig2)~", "~rho==.(rho)),#
+		xlab=expression(y[1]),ylab=expression(y[2]),zlab=expression(f(y[1],y[2])),#
+		col="light grey", theta = 55, phi = 30, r = 40, d = 0.1, expand = 0.5,#
+		ltheta = 90, lphi = 180, shade = 0.4, ticktype = "detailed", nticks=5)
+persp(y1, y2, z, main = "Bivariate Normal Distribution",#
+		sub = bquote(bold(mu[1])==.(mu1)~", "~sigma[1]==.(sig1)~", "~mu[2]==.(mu2)~#
+		", "~sigma[2]==.(sig2)~", "~rho==.(rho)),#
+		xlab=bquote(y[1]),ylab=expression(y[2]),zlab=expression(f(y[1],y[2])),#
+		col="light grey", theta = 55, phi = 30, r = 40, d = 0.1, expand = 0.5,#
+		ltheta = 90, lphi = 180, shade = 0.4, ticktype = "detailed", nticks=5)
+persp(y1, y2, z, main = "Bivariate Normal Distribution",#
+		sub = bquote(bold(mu[1])==.(mu1)~", "~sigma[1]==.(sig1)~", "~mu[2]==.(mu2)~#
+		", "~sigma[2]==.(sig2)~", "~rho==.(rho)),#
+		xlab=bquote(bold(y[1])),ylab=expression(y[2]),zlab=expression(f(y[1],y[2])),#
+		col="light grey", theta = 55, phi = 30, r = 40, d = 0.1, expand = 0.5,#
+		ltheta = 90, lphi = 180, shade = 0.4, ticktype = "detailed", nticks=5)
+sub = bquote(bold(mu[1])==.(mu1)~", "~sigma[1]==.(sig1)~", "~mu[2]==.(mu2)~
+xlab=expression(y[1]),ylab=expression(y[2]),zlab=expression(f(y[1],y[2])),
+persp(y1, y2, z, main = "Bivariate Normal Distribution",
+p.adjustersp(y1, y2, z, main = "Bivariate Normal Distribution",#
+		sub = bquote(bold(mu[1])==.(mu1)~", "~sigma[1]==.(sig1)~", "~mu[2]==.(mu2)~#
+		", "~sigma[2]==.(sig2)~", "~rho==.(rho)),#
+		xlab=expression(y[1]),ylab=expression(y[2]),zlab=expression(f(y[1],y[2])),#
+		col="light grey", theta = 55, phi = 30, r = 40, d = 0.1, expand = 0.5,#
+		ltheta = 90, lphi = 180, shade = 0.4, ticktype = "detailed", nticks=5)
+persp(y1, y2, z, main = "Bivariate Normal Distribution",#
+		sub = bquote(bold(mu[1])==.(mu1)~", "~sigma[1]==.(sig1)~", "~mu[2]==.(mu2)~#
+		", "~sigma[2]==.(sig2)~", "~rho==.(rho)),#
+		xlab=expression(y[1]),ylab=expression(y[2]),zlab=expression(f(y[1],y[2])),#
+		col="light grey", theta = 55, phi = 30, r = 40, d = 0.1, expand = 0.5,#
+		ltheta = 90, lphi = 180, shade = 0.4, ticktype = "detailed", nticks=5)
+library(shiny)
+runApp("/Users/rdfricker/Desktop/BivariateNormDemo")
+?seq
+runApp("/Users/rdfricker/Desktop/BivariateNormDemo")
+?persp
+runApp("/Users/rdfricker/Desktop/BivariateNormDemo")
+pbinom(0,25,0.1)
+y1 <- runif(100000)
+y2 <- runif(100000)
+u <- y1 + y2
+hist(u)
+y1 <- runif(100000)  # 100,000 random observations from a U(0,1) distribution
+y2 <- runif(100000)  # Another 100,000 observations independent from y1
+u <- y1 + y2         # Caluclate u, a function of y1 and y2
+hist(u,breaks=100,freq=FALSE)  # An empirical estimate of the pdf
+hist(rexp(100000,1))
+u <- runif(1000000)
+beta <- 1
+y <- -beta*(1-u)
+hist(y)
+y <- -beta*log(1-u)
+hist(y)
+u <- runif(1000000)   # Generate a million observations from U(0,1) distribution
+beta <- 1             # Set beta to 1 for this example
+y <- -beta*log(1-u)   # Transform from U(0,1) to Exp(beta=1)
+hist(y,breaks=100,freq=FALSE)
+u <- runif(1000000)   # Generate a million observations from U(0,1) distribution
+beta <- 1             # Set beta to 1 for this example
+y <- -beta*log(1-u)   # Transform from U(0,1) to Exp(beta=1)
+hist(y,breaks=100,freq=FALSE)  # An empirical estimate of the pdf
+exp_rvs <- exp(1000000,beta)   # Generate a million observations from Exp(beta=1)
+u <- runif(1000000)   # Generate a million observations from U(0,1) distribution
+beta <- 1             # Set beta to 1 for this example
+y <- -beta*log(1-u)   # Transform from U(0,1) to Exp(beta=1)
+hist(y,breaks=100,freq=FALSE)  # An empirical estimate of the pdf
+exp_rvs <- rexp(1000000,beta)   # Generate a million observations from Exp(beta=1)
+hist(exp_rvs,breaks=100,freq=FALSE)  # An empirical estimate of the pdf using Exp(1)
+u <- runif(1000000)   # Generate a million observations from U(0,1) distribution
+y <- -beta*log(1-u)   # Transform from U(0,1) to Exp(beta=1)
+hist(y,breaks=100,freq=FALSE)  # An empirical estimate of the pdf
+exp_rvs <- rexp(1000000,beta)   # Generate a million observations from Exp(beta=1)
+hist(exp_rvs,breaks=100,freq=FALSE)  # An empirical estimate of the pdf using Exp(1)
+plot(sort(y),sort(exp_rvs))
+u <- runif(1000000)   # Generate a million observations from U(0,1) distribution
+y <- -beta*log(1-u)   # Transform from U(0,1) to Exp(beta=1)
+u <- runif(1000000)   # Generate a million observations from U(0,1) distribution
+y <- -beta*log(1-u)   # Transform from U(0,1) to Exp(beta=1)
+hist(y,breaks=100,freq=FALSE)  # An empirical estimate of the pdf
+exp_rvs <- rexp(1000000,beta)   # Generate a million observations from Exp(beta=1)
+hist(exp_rvs,breaks=100,freq=FALSE)  # An empirical estimate of the pdf using Exp(1)
+plot(sort(y),sort(exp_rvs))   # Comparing the two via an empirical quantile-quantile plot
+u <- runif(1000000)   # Generate a million observations from U(0,1) distribution
+beta <- 1             # Set beta to 1 for this example
+y <- -beta*log(1-u)   # Transform from U(0,1) to Exp(beta=1)
+hist(y,breaks=100,freq=FALSE)  # An empirical estimate of the pdf
+exp_rvs <- rexp(1000000,beta)   # Generate a million observations from Exp(beta=1)
+hist(exp_rvs,breaks=100,freq=FALSE)  # An empirical estimate of the pdf using Exp(1)
+plot(sort(y),sort(exp_rvs))   # Comparing the two via an empirical quantile-quantile plot
+hist(rexp(10000,5))
+hist(rexp(10000,1/5))
+?predict
+library(shiny)
+runApp("/Users/rdfricker/Desktop/BivariateNormExample")
+library(mvnorm)
+?matrix
+runApp("/Users/rdfricker/Desktop/BivariateNormExample")
+library(MASS)
+mu1<-100
+mu2 <- 0
+sig1 <- 10
+sig2 <- 10
+mvrnorm(10,mu=c(mu1,mu2),Sigma=matrix(sig1,0,0,sig2))
+mvrnorm(10,mu=c(mu1,mu2),Sigma=matrix(sig1,0,0,sig2),2)
+matrix(c(sig1,0,0,sig2),2)
+mvrnorm(10,mu=c(mu1,mu2),Sigma=matrix(c(sig1,0,0,sig2),2))
+runApp("/Users/rdfricker/Desktop/BivariateNormExample")
+mvrnorm(10,mu=c(mu1,mu2),Sigma=matrix(c(sig1,0,0,sig2),2))
+mvrnorm(1,mu=c(mu1,mu2),Sigma=matrix(c(sig1,0,0,sig2),2))
+sig1
+sig2
+runApp("/Users/rdfricker/Desktop/BivariateNormExample")
+shiny::runGitHub('BivariateNormDemo','rdfricker')
+qchisq(0.38,2)
+qchisq(0.394,2)
+library(shiny)
+runApp("/Users/rdfricker/Desktop/BivariateNormExample")
